@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: machaq <machaq@1337.student.ma>            +#+  +:+       +#+        */
+/*   By: iel-alam <iel-alam@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/30 16:04:47 by machaq            #+#    #+#             */
-/*   Updated: 2024/12/04 16:03:40 by machaq           ###   ########.fr       */
+/*   Created: 2025/01/07 22:45:08 by iel-alam          #+#    #+#             */
+/*   Updated: 2025/01/07 22:45:09 by iel-alam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H

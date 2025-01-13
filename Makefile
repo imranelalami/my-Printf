@@ -13,10 +13,7 @@ OBJECT = $(SOURCE:.c=.o)
 all: $(NAME)
 
 $(NAME) : $(OBJECT)
-	$(AR) $@ $^
-
-%.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@ 
+	ar rcs $(NAME) $(SOURCE)
 
 clean :
 	$(RM) $(OBJECT)

@@ -3,96 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-alam <iel-alam@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: souel-bo <souel-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 22:45:14 by iel-alam          #+#    #+#             */
-/*   Updated: 2025/01/07 22:45:16 by iel-alam         ###   ########.fr       */
+/*   Created: 2024/11/23 21:39:13 by souel-bo          #+#    #+#             */
+/*   Updated: 2024/11/26 10:50:22 by souel-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
 
-int	checker(char spec, va_list args, char flag)
+static void	ft_put(const char *format, va_list list, int *counter)
 {
-	int	len;
-
-	len = 0;
-	if (spec == 'c')
-		len = ft_putchar(va_arg(args, int));
-	else if (spec == 's')
-		len = handle_string(va_arg(args, char *));
-	else if (spec == 'd' || spec == 'i')
-		len = ft_printnb(va_arg(args, int), flag);
-	else if (spec == 'u')
-		len = ft_printunsnb(va_arg(args, unsigned int));
-	else if (spec == 'x')
-		len = ft_printhex((unsigned long)va_arg(args, unsigned int),
-				"0123456789abcdef", flag);
-	else if (spec == 'X')
-		len = ft_printhex((unsigned long)va_arg(args, unsigned int),
-				"0123456789ABCDEF", flag);
-	else if (spec == 'p')
-		len = handle_pointer((unsigned long)va_arg(args, void *));
-	else if (spec == '%')
-		len = ft_putchar('%');
-	return (len);
+	if (*format == 'c')
+		ft_putchar((char)va_arg(list, int), counter);
+	else if (*format == 's')
+		ft_putstr(va_arg(list, char *), counter);
+	else if (*format == 'p')
+		ft_putptr(va_arg(list, unsigned long), counter);
+	else if (*format == 'd' || *format == 'i')
+		ft_putnbr(va_arg(list, int), counter);
+	else if (*format == 'u')
+		ft_put_unsigned(va_arg(list, unsigned int), counter);
+	else if (*format == 'x')
+		ft_puthex(va_arg(list, unsigned int), "0123456789abcdef", counter);
+	else if (*format == 'X')
+		ft_puthex(va_arg(list, unsigned int), "0123456789ABCDEF", counter);
+	else if (*format == '%')
+		ft_putchar('%', counter);
 }
 
-int	handle_string(const char *str)
+int	ft_printf(const char *format, ...)
 {
-	int	len;
-	int	str_len;
+	va_list	list;
+	int		counter;
 
-	len = 0;
-	str_len = 0;
-	if (str == NULL)
-		str = "(null)";
-	while (str[str_len])
-		str_len++;
-	len += ft_putstr(str);
-	return (len);
-}
-
-int	handle_pointer(unsigned long address)
-{
-	int	len;
-
-	len = 0;
-	if (address == 0)
-		len = ft_putstr("(nil)");
-	else
+	if (!format)
+		return (0);
+	va_start(list, format);
+	counter = 0;
+	while (*format)
 	{
-		len += ft_putstr("0x");
-		len += ft_printhex(address, "0123456789abcdef", 0);
-	}
-	return (len);
-}
-
-int	ft_printf(const char *s, ...)
-{
-	va_list	args;
-	int		len;
-	char	flag;
-
-	len = 0;
-	va_start(args, s);
-	while (*s)
-	{
-		if (*s == '%')
+		if (*format == '%')
 		{
-			s++;
-			flag = 0;
-			if (*s == '#' || *s == '+' || *s == ' ')
-				flag = *s++;
-			if (*s)
-				len += checker(*s, args, flag);
+			format++;
+			ft_put(format, list, &counter);
 		}
 		else
-			len += ft_putchar(*s);
-		if (*s)
-			s++;
+			ft_putchar(*format, &counter);
+		format++;
 	}
-	va_end(args);
-	return (len);
+	va_end(list);
+	return (counter);
 }

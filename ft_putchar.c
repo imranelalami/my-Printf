@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-alam <iel-alam@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: souel-bo <souel-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 22:45:33 by iel-alam          #+#    #+#             */
-/*   Updated: 2025/01/07 22:45:35 by iel-alam         ###   ########.fr       */
+/*   Created: 2024/11/24 10:08:22 by souel-bo          #+#    #+#             */
+/*   Updated: 2024/11/24 12:55:45 by souel-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putchar(char c)
+void	ft_putchar(char c, int *counter)
 {
 	write(1, &c, 1);
-	return (1);
+	(*counter)++;
 }

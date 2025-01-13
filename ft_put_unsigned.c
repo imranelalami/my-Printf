@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printunsnb.c                                    :+:      :+:    :+:   */
+/*   ft_put_unsigned.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-alam <iel-alam@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: souel-bo <souel-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 22:45:27 by iel-alam          #+#    #+#             */
-/*   Updated: 2025/01/07 22:45:30 by iel-alam         ###   ########.fr       */
+/*   Created: 2024/11/24 11:57:43 by souel-bo          #+#    #+#             */
+/*   Updated: 2024/11/24 12:58:29 by souel-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printunsnb(unsigned int i)
+void	ft_put_unsigned(unsigned int nb, int *counter)
 {
-	int	len;
-
-	len = 0;
-	if (i == 0)
-	{
-		ft_putchar('0');
-		return (1);
-	}
-	if (i >= 10)
-		len += ft_printunsnb(i / 10);
-	len += ft_putchar((i % 10) + '0');
-	return (len);
+	if (nb >= 10)
+		ft_put_unsigned(nb / 10, counter);
+	ft_putchar(nb % 10 + '0', counter);
 }

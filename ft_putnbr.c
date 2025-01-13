@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printnb.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-alam <iel-alam@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: souel-bo <souel-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 22:45:22 by iel-alam          #+#    #+#             */
-/*   Updated: 2025/01/07 22:45:24 by iel-alam         ###   ########.fr       */
+/*   Created: 2024/11/24 10:08:29 by souel-bo          #+#    #+#             */
+/*   Updated: 2024/11/24 13:09:55 by souel-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
 
-int	ft_printnb(int nb, char flag)
+void	ft_putnbr(int nb, int *counter)
 {
-	int	len;
-
-	len = 0;
 	if (nb == -2147483648)
-		return (write(1, "-2147483648", 11));
+	{
+		ft_putchar('-', counter);
+		ft_putchar('2', counter);
+		nb = 147483648;
+	}
 	if (nb < 0)
 	{
-		len += ft_putchar('-');
-		nb = -nb;
+		ft_putchar('-', counter);
+		nb *= -1;
 	}
-	else if (flag == '+' || flag == ' ')
-		len += ft_putchar(flag);
 	if (nb >= 10)
-		len += ft_printnb(nb / 10, 0);
-	len += ft_putchar((nb % 10) + '0');
-	return (len);
+	{
+		ft_putnbr(nb / 10, counter);
+	}
+	ft_putchar('0' + nb % 10, counter);
 }

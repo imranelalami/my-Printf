@@ -3,29 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-alam <iel-alam@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: souel-bo <souel-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 22:45:08 by iel-alam          #+#    #+#             */
-/*   Updated: 2025/01/07 22:45:09 by iel-alam         ###   ########.fr       */
+/*   Created: 2024/11/23 21:26:59 by souel-bo          #+#    #+#             */
+/*   Updated: 2024/11/24 13:56:02 by souel-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include <stdio.h>
 # include <unistd.h>
+# include <limits.h>
 
-int	ft_printf(const char *s, ...);
-int	ft_putstr(const char *s);
-int	ft_printhex(unsigned long adress, const char *base, char flag);
-int	ft_printnb(int nb, char flag);
-int	ft_putchar(char c);
-int	ft_printunsnb(unsigned int i);
-int	handle_string(const char *str);
-int	handle_pointer(unsigned long address);
-int	checker(char spec, va_list args, char flag);
+int		ft_printf(const char *format, ...);
+void	ft_putchar(char c, int *counter);
+void	ft_putstr(char *s, int *counter);
+void	ft_put_unsigned(unsigned int nb, int *counter);
+void	ft_puthex(unsigned long nb, char *base, int *counter);
+void	ft_putnbr(int nb, int *counter);
+void	ft_putptr(unsigned long nb, int *counter);
 
 #endif

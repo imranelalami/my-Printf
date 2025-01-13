@@ -1,28 +1,27 @@
-SRCS_MANDATORY = ft_printf.c ft_putchar.c ft_putstr.c ft_printnb.c ft_printhex.c ft_printunsnb.c
-OBJS_MANDATORY = $(SRCS_MANDATORY:.c=.o)
-
-
-NAME = libftprintf.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Werror -Werror
+NAME =  libftprintf.a
+RM = rm -rf
+AR = ar rcs
+SOURCE =  ft_printf.c  ft_putchar.c  ft_puthex.c  ft_putnbr.c  ft_putptr.c\
+		  ft_putstr.c  ft_put_unsigned.c
+
+OBJECT = $(SOURCE:.c=.o) 
+
+.PHONY: clean
 
 all: $(NAME)
 
-$(NAME): $(OBJS_MANDATORY)
-	ar rcs $(NAME) $(OBJS_MANDATORY)
+$(NAME) : $(OBJECT)
+	$(AR) $@ $^
 
-bonus: $(OBJS_BONUS)
-	ar rcs $(NAME) $(OBJS_BONUS)
+%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
-clean:
-	rm -f $(OBJS_MANDATORY) $(OBJS_BONUS)
+clean :
+	$(RM) $(OBJECT)
 
-fclean: clean
-	rm -f $(NAME)
+fclean : clean
+	$(RM) $(NAME)
 
-re: fclean all
-
-.PHONY: all bonus clean fclean re
-
-
-.SECONDARY : ${MANDATORY_OBJS} ${BONUS_OBJS}
+re : fclean all
